@@ -1,6 +1,6 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
-import Footer from './Test'
+import Footer from './components/card'
 import registerServiceWorker from './registerServiceWorker'
 import './index.css'
 
