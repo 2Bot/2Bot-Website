@@ -1,9 +1,10 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
-import Footer from './components/card'
+import Main from './components/main'
 import registerServiceWorker from './registerServiceWorker'
+import 'yorha'
 import './index.css'
 
-ReactDOM.render(<Footer/>, document.getElementById('root') as HTMLElement)
+ReactDOM.render(<Main/>, document.querySelector('body') as HTMLElement)
 
 registerServiceWorker()
