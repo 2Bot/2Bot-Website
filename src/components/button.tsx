@@ -1,32 +1,36 @@
 import * as React from 'react'
 
-interface State {
+interface ButtonState {
+  disabled: boolean
+}
+
+interface ButtonProps {
+  id: number
+  name?: string 
+  href?: string
   active: boolean
+  onChange(i: number): void
 }
 
-interface Props {
-  name: string
-  href: string
-}
-
-export default class Button extends React.Component<Props, State> {
-  constructor(props: Props) {
+export default class Button extends React.Component<ButtonProps, ButtonState> {
+  constructor(props: ButtonProps) {
     super(props)
-    this.state = {active: false}
+    this.state = {disabled: false}
 
-    this.activate = this.activate.bind(this)
+    this.onChange = this.onChange.bind(this)
   }
 
-  activate() {
-    this.setState(prevState => (
-      {active: !prevState.active}
-    ))
+  onChange() {
+    this.props.onChange(this.props.id)
   }
 
   render() {
     return(
-      <button  onClick={this.activate} data-set={this.state.active}>{this.props.name}</button>
+      <a href={this.props.href}>
+        <button onClick={this.onChange} data-set={this.props.active} disabled={this.state.disabled}>
+          <cite>{this.props.name}</cite>
+        </button>
+      </a>
     )
   }
-
 }

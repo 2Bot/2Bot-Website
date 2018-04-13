@@ -1,13 +1,19 @@
 import * as React from 'react'
 
 import Button from './button'
+import Footer from './footer'
+import Header from './header'
 
 export default class Main extends React.Component {
   render() {
     return(
-      <main>
-        <Button name="Statistics" href="test"/>
-      </main>
+      <>
+        <Header/>
+        <main>
+          <p>hi</p>
+        </main>
+        <Footer/>
+      </>
     )
   }
 }
