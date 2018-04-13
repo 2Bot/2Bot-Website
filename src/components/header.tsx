@@ -3,10 +3,16 @@ import Button from './button'
 
 interface HeaderState {
   items: boolean[]
+}
 
-  names: {
-    [index: number]: string
-  }
+const names = {
+  0: 'Invite',
+  1: 'Login',
+}
+
+const hrefs = {
+  0: 'https://discordapp.com/oauth2/authorize?client_id=301819949683572738&scope=bot&permissions=3533824',
+  1: '#login',
 }
 
 export default class Header extends React.Component<{}, HeaderState> {
@@ -15,10 +21,6 @@ export default class Header extends React.Component<{}, HeaderState> {
 
     this.state = {
       items: [true, false], 
-      names: {
-        0: 'Invite',
-        1: 'Login'
-      }
     }
 
     this.refresh = this.refresh.bind(this)
@@ -34,7 +36,7 @@ export default class Header extends React.Component<{}, HeaderState> {
   }
 
   onChange(i: number): void {
-    let state: HeaderState = {items: [], names: this.state.names}
+    let state: HeaderState = {items: []}
 
     for (var j = 0; j < this.state.items.length; j++) {
       if (j === i) {
@@ -48,11 +50,16 @@ export default class Header extends React.Component<{}, HeaderState> {
 
   refresh() {
     return(
-      <ul>
-        {this.state.items.map((value: boolean, i: number) => {
-          return <li key={i.toString()}><Button id={i} active={value} onChange={this.onChange} name={this.state.names[i]}/></li> 
-        })}
-      </ul>
+      <>
+        <ul>
+          <li><Button active={false} name="test" href="/"/></li>
+        </ul>
+        <ul>
+          {this.state.items.map((value: boolean, i: number) => {
+            return <li key={i.toString()}><Button id={i} active={value} onChange={this.onChange} name={names[i]} href={hrefs[i]}/></li> 
+          })}
+        </ul>
+      </>
     )
   }
 }

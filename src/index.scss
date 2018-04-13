@@ -16,12 +16,17 @@ $c-card: #dcd8c0;
 }
 
 header {
+    width: 90%;
     margin-bottom: 2em;
-
+    padding: 0 2em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
     ul {
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: space-around;
         list-style: none;
 
         li {

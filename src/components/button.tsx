@@ -5,11 +5,11 @@ interface ButtonState {
 }
 
 interface ButtonProps {
-  id: number
-  name?: string 
-  href?: string
+  id?: number
+  name: string 
+  href: string
   active: boolean
-  onChange(i: number): void
+  onChange?(i: number): void
 }
 
 export default class Button extends React.Component<ButtonProps, ButtonState> {
@@ -21,12 +21,21 @@ export default class Button extends React.Component<ButtonProps, ButtonState> {
   }
 
   onChange() {
-    this.props.onChange(this.props.id)
+    if (this.props.onChange !== undefined) {
+      this.props.onChange(this.props.id!)
+    }
+  }
+
+  target(): string {
+    if (this.props.href.charAt(0) !== '/' && this.props.href.charAt(0) !== '#') {
+      return '_blank'
+    }
+    return ''
   }
 
   render() {
     return(
-      <a href={this.props.href}>
+      <a href={this.props.href} target={this.target()}>
         <button onClick={this.onChange} data-set={this.props.active} disabled={this.state.disabled}>
           <cite>{this.props.name}</cite>
         </button>
