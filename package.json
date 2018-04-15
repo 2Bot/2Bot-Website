@@ -1,31 +1,21 @@
 {
-  "name": "2bot-website",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "node-sass-chokidar": "^1.2.2",
-    "npm-run-all": "^4.1.2",
-    "react": "^16.3.1",
-    "react-dom": "^16.3.1",
-    "react-scripts-ts": "2.14.0",
-    "yorha": "^1.2.0"
-  },
-  "scripts": {
-     "build-css": "node-sass-chokidar src/ -o src/",
-     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
-     "start-js": "react-scripts-ts start",
-     "start": "npm-run-all -p watch-css start-js",
-     "build-js": "react-scripts-ts build",
-     "build": "npm-run-all build-css build-js",
-     "test": "react-scripts-ts test --env=jsdom",
-     "eject": "react-scripts-ts eject"
-   },
-  "devDependencies": {
-    "@types/jest": "^22.2.3",
-    "@types/node": "^9.6.4",
-    "@types/react": "^16.3.9",
-    "@types/react-dom": "^16.0.5",
-    "create-react-app-sass": "^1.1.0",
-    "typescript": "^2.8.1"
-  }
+    "scripts": {
+        "start": "concurrently \"yarn --cwd client/ start\" \"tsc -w\" \"nodemon --delay 3 build/server.js\""
+    },
+    "dependencies": {
+        "@types/hapi": "^17.0.10",
+        "concurrently": "^3.5.1",
+        "hapi": "^17.3.1",
+        "inert": "^5.1.0"
+    },
+    "name": "2bot-website",
+    "version": "0.0.1",
+    "main": "server.js",
+    "repository": "git@github.com:Strum355/2Bot-Website.git",
+    "author": "Noah Santschi-Cooney <noah@santschi-cooney.ch>",
+    "license": "MIT",
+    "devDependencies": {
+        "nodemon": "^1.17.3",
+        "typescript": "^2.8.1"
+    }
 }

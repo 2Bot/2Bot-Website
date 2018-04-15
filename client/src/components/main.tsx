@@ -10,7 +10,7 @@ export default class Main extends React.Component {
       <>
         <Header/>
         <main>
-          <p>hi</p>
+          <p>bye</p>
         </main>
         <Footer/>
       </>
