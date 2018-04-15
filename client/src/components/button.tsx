@@ -9,19 +9,21 @@ interface ButtonProps {
   name: string 
   href: string
   active: boolean
+  external: boolean
   onChange?(i: number): void
 }
 
 export default class Button extends React.Component<ButtonProps, ButtonState> {
   constructor(props: ButtonProps) {
     super(props)
+
     this.state = {disabled: false}
 
     this.onChange = this.onChange.bind(this)
   }
 
   onChange() {
-    if (this.props.onChange !== undefined) {
+    if (!this.props.external && this.props.onChange !== undefined) {
       this.props.onChange(this.props.id!)
     }
   }
