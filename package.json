@@ -1,12 +1,16 @@
 {
     "scripts": {
-        "start": "concurrently \"yarn --cwd client/ start\" \"tsc -w\" \"nodemon --delay 3 build/server.js\""
+        "start": "concurrently \"npm run start-client\" \"npm run start-server\"",
+        "start-client": "yarn --cwd client/ start",
+        "start-js": "nodemon --delay 1 build/server.js",
+        "watch-ts": "tsc -w",
+        "start-server": "concurrently \"npm run watch-ts\" \"npm run start-js\""
     },
     "dependencies": {
-        "@types/hapi": "^17.0.10",
-        "concurrently": "^3.5.1",
+        "btoa": "^1.2.1",
         "hapi": "^17.3.1",
-        "inert": "^5.1.0"
+        "inert": "^5.1.0",
+        "node-fetch": "^2.1.2"
     },
     "name": "2bot-website",
     "version": "0.0.1",
@@ -14,7 +18,11 @@
     "repository": "git@github.com:Strum355/2Bot-Website.git",
     "author": "Noah Santschi-Cooney <noah@santschi-cooney.ch>",
     "license": "MIT",
+    "private": true,
     "devDependencies": {
+        "@types/hapi": "^17.0.10",
+        "@types/node-fetch": "^1.6.8",
+        "concurrently": "^3.5.1",
         "nodemon": "^1.17.3",
         "typescript": "^2.8.1"
     }

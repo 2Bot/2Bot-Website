@@ -5,6 +5,10 @@ interface HeaderState {
   items: boolean[]
 }
 
+interface Resp {
+  url: string
+}
+
 const names = [
   'Invite', 
   'Login', 
@@ -13,7 +17,7 @@ const names = [
 
 const hrefs = [
   'https://discordapp.com/oauth2/authorize?client_id=301819949683572738&scope=bot&permissions=3533824', 
-  '#login', 
+  '/login', 
   'https://discord.gg/9T34Y6u'
 ]
 
@@ -56,13 +60,26 @@ export default class Header extends React.Component<{}, HeaderState> {
         <ul>
           <li><Button active={false} name="test" href="/" external={false}/></li>
         </ul>
-        <ul>
+        <ul>  
           {this.state.items.map((value: boolean, i: number) => {
             let external = false
             if (hrefs[i].startsWith('http')) {
               external = true
             }
-            return <li key={i.toString()}><Button id={i} active={value} onChange={this.onChange} name={names[i]} href={hrefs[i]} external={external}/></li> 
+
+            let onChange = this.onChange
+            if (names[i] === 'Login') {
+              onChange = () => {
+                fetch('/login', { method: 'GET' })
+                  .then((resp: Response) => {
+                    window.location.assign(resp.headers.get('location')!)
+                  })
+                  .catch((reason: any) => {
+                    console.log(reason)
+                  })
+              }
+            }
+            return <li key={i.toString()}><Button id={i} active={value} onClick={onChange} name={names[i]} href={hrefs[i]} external={external}/></li> 
           })}
         </ul>
       </>

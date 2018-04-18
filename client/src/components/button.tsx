@@ -10,7 +10,7 @@ interface ButtonProps {
   href: string
   active: boolean
   external: boolean
-  onChange?(i: number): void
+  onClick?(i: number): void
 }
 
 export default class Button extends React.Component<ButtonProps, ButtonState> {
@@ -23,8 +23,8 @@ export default class Button extends React.Component<ButtonProps, ButtonState> {
   }
 
   onChange() {
-    if (!this.props.external && this.props.onChange !== undefined) {
-      this.props.onChange(this.props.id!)
+    if (!this.props.external && this.props.onClick !== undefined) {
+      this.props.onClick(this.props.id!)
     }
   }
 
