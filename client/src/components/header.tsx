@@ -21,6 +21,12 @@ const hrefs = [
   'https://discord.gg/9T34Y6u'
 ]
 
+const external = [
+  true,
+  false,
+  true
+]
+
 export default class Header extends React.Component<{}, HeaderState> {
   constructor() {
     super({})
@@ -42,15 +48,10 @@ export default class Header extends React.Component<{}, HeaderState> {
   }
 
   onChange(i: number): void {
-    let state: HeaderState = {items: []}
+    let state: HeaderState = {items: Array(names.length).fill(false)}
 
-    for (var j = 0; j < this.state.items.length; j++) {
-      if (j === i) {
-        state.items.push(true)
-      } else {
-        state.items.push(false)
-      }
-    }
+    state[i] = true
+    
     this.setState(state)
   }
 
@@ -61,25 +62,8 @@ export default class Header extends React.Component<{}, HeaderState> {
           <li><Button active={false} name="test" href="/" external={false}/></li>
         </ul>
         <ul>  
-          {this.state.items.map((value: boolean, i: number) => {
-            let external = false
-            if (hrefs[i].startsWith('http')) {
-              external = true
-            }
-
-            let onChange = this.onChange
-            if (names[i] === 'Login') {
-              onChange = () => {
-                fetch('/login', { method: 'GET' })
-                  .then((resp: Response) => {
-                    window.location.assign(resp.headers.get('location')!)
-                  })
-                  .catch((reason: any) => {
-                    console.log(reason)
-                  })
-              }
-            }
-            return <li key={i.toString()}><Button id={i} active={value} onClick={onChange} name={names[i]} href={hrefs[i]} external={external}/></li> 
+          {this.state.items.map((value: boolean, i: number) => {            
+            return <li key={i.toString()}><Button id={i} active={value} onClick={this.onChange} name={names[i]} href={hrefs[i]} external={external[i]}/></li> 
           })}
         </ul>
       </>

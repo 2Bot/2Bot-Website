@@ -19,10 +19,10 @@ export default class Button extends React.Component<ButtonProps, ButtonState> {
 
     this.state = {disabled: false}
 
-    this.onChange = this.onChange.bind(this)
+    this.onClick = this.onClick.bind(this)
   }
 
-  onChange() {
+  onClick() {
     if (!this.props.external && this.props.onClick !== undefined) {
       this.props.onClick(this.props.id!)
     }
@@ -38,7 +38,7 @@ export default class Button extends React.Component<ButtonProps, ButtonState> {
   render() {
     return(
       <a href={this.props.href} target={this.target()}>
-        <button onClick={this.onChange} data-set={this.props.active} disabled={this.state.disabled}>
+        <button onClick={this.onClick} data-set={this.props.active} disabled={this.state.disabled}>
           <cite>{this.props.name}</cite>
         </button>
       </a>
