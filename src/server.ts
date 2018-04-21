@@ -11,6 +11,9 @@ const init = async () => {
       files: {
         relativeTo: path.join(__dirname, 'client')
       }
+    },
+    debug: {
+      request: ['error']
     }
   })
   
@@ -29,6 +32,8 @@ const init = async () => {
     provider: 'discord',
     clientId: config.client_id,
     clientSecret: config.client_secret, 
+    scope: ['identify', 'guilds'],
+    isSecure: false
   })
 
   server.route([rLogin])
@@ -41,6 +46,15 @@ const init = async () => {
         path: `./`,
         listing: true,
       }
+    }
+  })
+
+  server.route({
+    path: '/stuff',
+    method: 'GET',
+    handler: (req: hapi.Request, resp: hapi.ResponseToolkit) => {
+      console.log('hi')
+      return 'hi'
     }
   })
 

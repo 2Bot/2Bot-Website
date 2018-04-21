@@ -2,7 +2,7 @@
     "scripts": {
         "start": "concurrently \"npm run start-client\" \"npm run start-server\"",
         "start-client": "yarn --cwd client/ start",
-        "start-js": "nodemon --delay 1 build/server.js",
+        "start-js": "nodemon",
         "watch-ts": "tsc -w",
         "start-server": "concurrently \"npm run watch-ts\" \"npm run start-js\""
     },
@@ -16,7 +16,7 @@
     },
     "name": "2bot-website",
     "version": "0.0.1",
-    "main": "server.js",
+    "main": "build/server.js",
     "repository": "git@github.com:Strum355/2Bot-Website.git",
     "author": "Noah Santschi-Cooney <noah@santschi-cooney.ch>",
     "license": "MIT",

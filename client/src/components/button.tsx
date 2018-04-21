@@ -7,7 +7,7 @@ interface ButtonState {
 interface ButtonProps {
   id?: number
   name: string 
-  href: string
+  href?: string
   active: boolean
   external: boolean
   onClick?(i: number): void
@@ -29,6 +29,9 @@ export default class Button extends React.Component<ButtonProps, ButtonState> {
   }
 
   target(): string {
+    if (!this.props.href) {
+      return ''
+    }
     if (this.props.href.charAt(0) !== '/' && this.props.href.charAt(0) !== '#') {
       return '_blank'
     }

@@ -1,0 +1,14 @@
+{
+    "delay": "2",
+    "watch": [
+        "build/*.js"
+    ],
+    "ignore": [
+        "client/", 
+        "node_modules/", 
+        "*.MD", 
+        "*.png", 
+        "*.lock", 
+        "src/"
+    ]
+}

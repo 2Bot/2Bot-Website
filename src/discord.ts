@@ -1,16 +1,18 @@
 import * as hapi from 'hapi'
 
-const redirect = encodeURIComponent('http://localhost:3000/discord')
+const redirect = encodeURIComponent('http://localhost:3000/api/login')
 const baseURL = 'https://discordapp.com/api/'
 
 export const rLogin = {
-  path: '/login',
+  path: '/api/login',
   method: 'GET',
   options: {
     auth: 'discord',
     handler: (req: hapi.Request, resp: hapi.ResponseToolkit) => {
-      console.log('hi')
-      return req.auth.credentials
+      if (req.auth.isAuthenticated) {
+        return '<pre>' + JSON.stringify(req.auth.credentials, null, 4) + '</pre>'
+      }
+      return 'could not auth with github'
     }
   }
 }
