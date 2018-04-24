@@ -7,7 +7,7 @@
         "start-server": "concurrently \"npm run watch-ts\" \"npm run start-js\""
     },
     "dependencies": {
-        "bell": "^9.3.0",
+        "btoa": "^1.2.1",
         "enhanced-resolve": "^4.0.0",
         "hapi": "^17.3.1",
         "hapi-auth-cookie": "^8.1.0",
@@ -22,7 +22,7 @@
     "license": "MIT",
     "private": true,
     "devDependencies": {
-        "@types/bell": "^9.1.0",
+        "@types/btoa": "./node_modules/@types/btoa",
         "@types/hapi": "^17.0.10",
         "@types/inert": "^5.1.0",
         "@types/node-fetch": "^1.6.8",

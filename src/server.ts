@@ -1,5 +1,5 @@
 import * as hapi from 'hapi'
-import { rLogin } from './discord'
+import { rLogin, rCallback, rCode } from './discord'
 import { config } from './config'
 import * as path from 'path'
 
@@ -9,7 +9,7 @@ const init = async () => {
     host: 'localhost',
     routes: {
       files: {
-        relativeTo: path.join(__dirname, 'client')
+        relativeTo: path.join(__dirname)
       }
     },
     debug: {
@@ -17,26 +17,9 @@ const init = async () => {
     }
   })
   
-  await server.register([require('bell'), 
-                        require('hapi-auth-cookie'), 
-                        require('inert')])
+  await server.register([require('hapi-auth-cookie'), require('inert')])
 
-  server.auth.strategy('session', 'cookie', {
-    password: 'bababna_what_is_this???oogabooga',
-    cookie: 'auth',
-    isSecure: false,
-  })
-
-  server.auth.strategy('discord', 'bell', {
-    password: 'bababna_what_is_this???oogabooga',
-    provider: 'discord',
-    clientId: config.client_id,
-    clientSecret: config.client_secret, 
-    scope: ['identify', 'guilds'],
-    isSecure: false
-  })
-
-  server.route([rLogin])
+  server.route([rLogin, rCallback, rCode])
 
   server.route({
     path: '/{param*}',
